@@ -1,0 +1,24 @@
+@use "sass:list";
+
+$icons: (
+  "arrow-up": (10px, 7px),
+  "arrow-down": (10px, 7px),
+  "arrow-left": (7px, 10px),
+  "check": (13px, 11px),
+);
+
+.icon {
+  display: inline-block;
+  flex: none;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+@each $name, $size in $icons {
+  .#{$name} {
+    width: list.nth($size, 1);
+    height: list.nth($size, 2);
+    mask-image: url("/assets/shared/icon-#{$name}.svg");
+  }
+}

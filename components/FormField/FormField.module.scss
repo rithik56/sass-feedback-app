@@ -1,0 +1,28 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.field {
+  width: 100%;
+}
+
+.label {
+  @include type("h4");
+  display: block;
+  color: $color-navy;
+}
+
+.hint {
+  @include type("caption");
+  margin-top: 2px;
+  color: $color-slate;
+}
+
+.control {
+  margin-top: 16px;
+}
+
+.error {
+  @include type("caption");
+  margin-top: 4px;
+  color: $color-red;
+}

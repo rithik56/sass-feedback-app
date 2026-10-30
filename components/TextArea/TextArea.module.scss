@@ -1,0 +1,10 @@
+@use "../../styles/field" as *;
+
+.textArea {
+  @include field;
+  display: block;
+  min-height: 96px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  resize: vertical;
+}

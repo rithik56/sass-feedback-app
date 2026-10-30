@@ -1,0 +1,101 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+@use "../../styles/field" as *;
+
+.dropdown {
+  position: relative;
+}
+
+.select {
+  @include field;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  color: $color-navy;
+  text-align: left;
+  cursor: pointer;
+
+  // The arrow icon follows the text color, so it is set separately.
+  > :last-child {
+    color: $color-blue;
+  }
+
+  &[aria-expanded="true"] {
+    border-color: $color-blue;
+  }
+}
+
+.sort {
+  @include type("caption-sm");
+  @include focus-ring($color-white);
+  @include disabled;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  color: $color-surface-alt;
+
+  @include mq(tablet) {
+    @include type("caption");
+    height: 72px;
+  }
+
+  > :last-child {
+    color: $color-white;
+  }
+
+  @include hover {
+    opacity: 0.75;
+  }
+
+  &[aria-expanded="true"] {
+    opacity: 0.75;
+  }
+}
+
+.sortValue {
+  font-weight: $font-weight-bold;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  outline: none;
+  background-color: $color-white;
+  box-shadow: $shadow-menu;
+}
+
+.sortMenu {
+  width: 255px;
+}
+
+.option {
+  @include type("body-1");
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 24px;
+  color: $color-slate;
+  cursor: pointer;
+
+  // The check icon stays purple in every state.
+  > :last-child:not(:only-child) {
+    color: $color-purple;
+  }
+
+  & + & {
+    border-top: 1px solid $divider;
+  }
+
+  &:hover,
+  &.activeOption {
+    color: $color-purple;
+  }
+}

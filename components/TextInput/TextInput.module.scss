@@ -1,0 +1,6 @@
+@use "../../styles/field" as *;
+
+.input {
+  @include field;
+  height: 48px;
+}

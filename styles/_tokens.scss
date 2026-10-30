@@ -1,0 +1,37 @@
+// Values come from the Figma style guide. See CLAUDE.md.
+
+// Colors
+$color-purple: #ad1fea;
+$color-purple-hover: #c75af6;
+$color-blue: #4661e6;
+$color-blue-hover: #7c91f9;
+$color-navy: #3a4374;
+$color-navy-hover: #656ea3;
+$color-red: #d73737;
+$color-red-hover: #e98888;
+$color-navy-dark: #373f68;
+$color-slate: #647196;
+$color-white: #ffffff;
+$color-surface: #f7f8fd;
+$color-surface-alt: #f2f4ff;
+$color-surface-hover: #cfd7ff;
+$color-orange: #f49f85;
+$color-sky: #62bcfa;
+
+// Typography
+$font-family: var(--font-jost), sans-serif;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Shape and effects
+$radius-lg: 10px;
+$radius-sm: 5px;
+$shadow-menu: 0 10px 40px -7px rgba(55, 63, 104, 0.35);
+$divider: rgba(58, 67, 116, 0.15);
+$overlay: rgba(0, 0, 0, 0.5);
+
+// Breakpoints
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;

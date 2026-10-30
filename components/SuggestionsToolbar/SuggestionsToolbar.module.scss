@@ -1,0 +1,41 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 24px;
+  background-color: $color-navy-dark;
+
+  @include mq(tablet) {
+    height: 72px;
+    padding: 0 12px 0 24px;
+    border-radius: $radius-lg;
+  }
+
+  @include mq(desktop) {
+    padding-right: 16px;
+  }
+}
+
+.summary {
+  display: none;
+
+  @include mq(tablet) {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 38px;
+  }
+}
+
+.count {
+  @include type("h3");
+  color: $color-white;
+  white-space: nowrap;
+}
+
+.addButton {
+  margin-left: auto;
+}

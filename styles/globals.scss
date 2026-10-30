@@ -1,0 +1,27 @@
+@use "reset";
+@use "tokens" as *;
+@use "mixins" as *;
+
+body {
+  @include type("body-1");
+  min-height: 100vh;
+  font-family: $font-family;
+  color: $color-navy;
+  background-color: $color-surface;
+}
+
+h1 {
+  @include type("h1");
+}
+
+h2 {
+  @include type("h2");
+}
+
+h3 {
+  @include type("h3");
+}
+
+h4 {
+  @include type("h4");
+}

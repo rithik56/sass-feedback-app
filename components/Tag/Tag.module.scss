@@ -1,0 +1,28 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.tag {
+  @include type("body-3");
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 16px;
+  border-radius: $radius-lg;
+  background-color: $color-surface-alt;
+  color: $color-blue;
+  white-space: nowrap;
+}
+
+.interactive {
+  @include focus-ring;
+  @include disabled;
+
+  @include hover {
+    background-color: $color-surface-hover;
+  }
+}
+
+.tag.active {
+  background-color: $color-blue;
+  color: $color-white;
+}

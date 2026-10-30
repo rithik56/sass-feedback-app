@@ -1,0 +1,29 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+// Shared look for text inputs, textareas and the select trigger.
+@mixin field {
+  @include type("body-2");
+  @include disabled;
+  width: 100%;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  outline: none;
+  background-color: $color-surface;
+  color: $color-navy;
+
+  @include hover {
+    border-color: $color-blue;
+  }
+
+  &:focus,
+  &:focus-visible,
+  &[data-state="active"] {
+    border-color: $color-blue;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-red;
+  }
+}

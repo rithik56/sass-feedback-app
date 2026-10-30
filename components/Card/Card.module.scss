@@ -1,0 +1,6 @@
+@use "../../styles/tokens" as *;
+
+.card {
+  border-radius: $radius-lg;
+  background-color: $color-white;
+}

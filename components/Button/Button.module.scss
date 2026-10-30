@@ -1,0 +1,61 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.button {
+  @include type("button");
+  @include focus-ring;
+  @include disabled;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: $radius-lg;
+  color: $color-surface-alt;
+  white-space: nowrap;
+}
+
+// Smaller on mobile, standard size from tablet up.
+.compact {
+  @include type("button-sm");
+  height: 40px;
+  padding: 0 16px;
+
+  @include mq(tablet) {
+    @include type("button");
+    height: 44px;
+    padding: 0 24px;
+  }
+}
+
+.purple {
+  background-color: $color-purple;
+
+  @include hover {
+    background-color: $color-purple-hover;
+  }
+}
+
+.blue {
+  background-color: $color-blue;
+
+  @include hover {
+    background-color: $color-blue-hover;
+  }
+}
+
+.navy {
+  background-color: $color-navy;
+
+  @include hover {
+    background-color: $color-navy-hover;
+  }
+}
+
+.red {
+  background-color: $color-red;
+
+  @include hover {
+    background-color: $color-red-hover;
+  }
+}

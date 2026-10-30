@@ -1,0 +1,153 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.layout {
+  @include mq(tablet) {
+    padding: 56px 40px 113px 39px;
+  }
+
+  @include mq(desktop) {
+    display: grid;
+    grid-template-columns: 255px minmax(0, 1fr);
+    gap: 30px;
+    align-items: start;
+    max-width: 1188px;
+    margin: 0 auto;
+    padding: 94px 39px 129px;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  @include mq(tablet) {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  @include mq(desktop) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 24px;
+  background: url("/assets/suggestions/mobile/background-header.png") center / cover no-repeat;
+  color: $color-white;
+
+  @include mq(tablet) {
+    align-items: flex-end;
+    height: auto;
+    min-height: 178px;
+    padding: 24px;
+    border-radius: $radius-lg;
+    background-image: url("/assets/suggestions/tablet/background-header.png");
+  }
+
+  @include mq(desktop) {
+    min-height: 137px;
+    background-image: url("/assets/suggestions/desktop/background-header.png");
+  }
+}
+
+.brandName {
+  @include type("brand-sm");
+
+  @include mq(tablet) {
+    @include type("h2");
+  }
+}
+
+.brandTagline {
+  @include type("subtitle-sm");
+  opacity: 0.75;
+
+  @include mq(tablet) {
+    @include type("subtitle");
+  }
+}
+
+.menuButton {
+  @include focus-ring($color-white);
+  @include disabled;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 17px;
+
+  @include hover {
+    opacity: 0.75;
+  }
+
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 72px 0 0;
+  background-color: $overlay;
+}
+
+// One set of panels: a drawer on mobile, regular sidebar cards from tablet up.
+.drawer {
+  position: fixed;
+  top: 72px;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 271px;
+  padding: 24px;
+  overflow-y: auto;
+  visibility: hidden;
+  background-color: $color-surface;
+
+  @include mq(tablet) {
+    position: static;
+    display: contents;
+    visibility: visible;
+  }
+}
+
+.drawerOpen {
+  visibility: visible;
+}
+
+.main {
+  @include mq(tablet) {
+    margin-top: 40px;
+  }
+
+  @include mq(desktop) {
+    margin-top: 0;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 24px 55px;
+
+  @include mq(tablet) {
+    margin-top: 24px;
+    padding: 0;
+  }
+
+  @include mq(desktop) {
+    gap: 20px;
+  }
+}

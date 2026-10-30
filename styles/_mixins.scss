@@ -1,0 +1,40 @@
+@use "sass:map";
+@use "tokens" as *;
+@forward "typography";
+
+$breakpoints: (
+  "tablet": $breakpoint-tablet,
+  "desktop": $breakpoint-desktop,
+);
+
+@mixin mq($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error "Unknown breakpoint: #{$name}";
+  }
+
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+// data-state lets the /design-system page show a state without interaction.
+@mixin hover {
+  &:hover,
+  &[data-state="hover"] {
+    @content;
+  }
+}
+
+@mixin focus-ring($color: $color-blue) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+@mixin disabled {
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

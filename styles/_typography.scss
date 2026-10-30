@@ -1,0 +1,35 @@
+@use "sass:list";
+@use "sass:map";
+@use "tokens" as *;
+
+$type-styles: (
+  "h1": ($font-weight-bold, 24px, 35px, -0.33px),
+  "h2": ($font-weight-bold, 20px, 29px, -0.25px),
+  "h3": ($font-weight-bold, 18px, 26px, -0.25px),
+  "h4": ($font-weight-bold, 14px, 20px, -0.2px),
+  "body-1": ($font-weight-regular, 16px, 23px, 0),
+  "body-2": ($font-weight-regular, 15px, 22px, 0),
+  "body-3": ($font-weight-semibold, 13px, 19px, 0),
+  "upvote": ($font-weight-bold, 13px, 19px, -0.18px),
+  "button": ($font-weight-bold, 14px, 20px, 0),
+  "caption": ($font-weight-regular, 14px, 20px, 0),
+  "caption-sm": ($font-weight-regular, 13px, 19px, 0),
+  "title-sm": ($font-weight-bold, 13px, 19px, -0.18px),
+  "button-sm": ($font-weight-bold, 13px, 19px, 0),
+  "count": ($font-weight-bold, 16px, 23px, -0.22px),
+  "brand-sm": ($font-weight-bold, 15px, 22px, -0.19px),
+  "subtitle": ($font-weight-medium, 15px, 22px, 0),
+  "subtitle-sm": ($font-weight-medium, 13px, 19px, 0),
+);
+
+@mixin type($name) {
+  @if not map.has-key($type-styles, $name) {
+    @error "Unknown type style: #{$name}";
+  }
+
+  $style: map.get($type-styles, $name);
+  font-weight: list.nth($style, 1);
+  font-size: list.nth($style, 2);
+  line-height: list.nth($style, 3);
+  letter-spacing: list.nth($style, 4);
+}

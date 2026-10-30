@@ -1,0 +1,112 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "content content"
+    "upvote comments";
+  grid-template-columns: auto 1fr;
+  row-gap: 16px;
+  padding: 24px;
+
+  @include mq(tablet) {
+    grid-template-areas: "upvote content comments";
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    padding: 28px 32px;
+  }
+
+  @include hover {
+    .title {
+      color: $color-blue;
+    }
+  }
+}
+
+.content {
+  grid-area: content;
+
+  @include mq(tablet) {
+    margin: 0 24px 0 40px;
+  }
+}
+
+.title {
+  @include type("title-sm");
+
+  @include mq(tablet) {
+    @include type("h3");
+  }
+}
+
+// Stretches over the whole card, so the card is one click target.
+.link {
+  @include focus-ring;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: $radius-lg;
+  }
+}
+
+.description {
+  @include type("caption-sm");
+  margin-top: 9px;
+  color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("body-1");
+    margin-top: 4px;
+  }
+}
+
+.tag {
+  margin-top: 8px;
+
+  @include mq(tablet) {
+    margin-top: 12px;
+  }
+}
+
+// Sits above the card link's click target.
+.upvote {
+  grid-area: upvote;
+  position: relative;
+  z-index: 1;
+  align-self: start;
+}
+
+.comments {
+  @include type("title-sm");
+  grid-area: comments;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+
+  @include mq(tablet) {
+    @include type("count");
+    gap: 8px;
+  }
+}
+
+.commentCount {
+  min-width: 18px;
+  text-align: center;
+}
+
+.noComments {
+  opacity: 0.5;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

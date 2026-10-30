@@ -1,0 +1,146 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+$swatches: (
+  "purple": $color-purple,
+  "purple-hover": $color-purple-hover,
+  "blue": $color-blue,
+  "blue-hover": $color-blue-hover,
+  "navy": $color-navy,
+  "navy-hover": $color-navy-hover,
+  "red": $color-red,
+  "red-hover": $color-red-hover,
+  "navy-dark": $color-navy-dark,
+  "slate": $color-slate,
+  "white": $color-white,
+  "surface": $color-surface,
+  "surface-alt": $color-surface-alt,
+  "surface-hover": $color-surface-hover,
+  "orange": $color-orange,
+  "sky": $color-sky,
+);
+
+.page {
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 32px 24px 96px;
+}
+
+.pageTitle {
+  margin-bottom: 32px;
+}
+
+// Components sit on white in Figma, and default states blend into the page color.
+.section {
+  margin-bottom: 32px;
+  padding: 24px;
+  border-radius: $radius-lg;
+  background-color: $color-white;
+
+  @include mq(tablet) {
+    padding: 32px;
+  }
+}
+
+.sectionTitle {
+  margin-bottom: 24px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  @include mq(tablet) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.swatch {
+  height: 96px;
+  margin-bottom: 8px;
+  border: 1px solid $divider;
+  border-radius: $radius-lg;
+}
+
+@each $name, $color in $swatches {
+  .swatch-#{$name} {
+    background-color: $color;
+  }
+}
+
+.swatchName {
+  @include type("h4");
+}
+
+.swatchHex {
+  @include type("caption");
+  color: $color-slate;
+}
+
+.typeList {
+  display: grid;
+  gap: 20px;
+}
+
+@each $name in ("h1", "h2", "h3", "h4", "body-1", "body-2", "body-3", "upvote", "button", "caption", "caption-sm", "title-sm", "button-sm", "count", "brand-sm", "subtitle", "subtitle-sm") {
+  .type-#{$name} {
+    @include type($name);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 32px;
+}
+
+.fields {
+  display: grid;
+  gap: 40px;
+
+  @include mq(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.state {
+  display: grid;
+  gap: 12px;
+}
+
+.stateContent {
+  min-height: 44px;
+}
+
+.stateLabel {
+  @include type("caption");
+  color: $color-slate;
+}
+
+.sortBar {
+  display: inline-block;
+  padding: 0 16px;
+  border-radius: $radius-lg;
+  background-color: $color-navy-dark;
+}
+
+// Open menus are absolutely positioned, so these reserve their height (rows + 16px gap).
+.openMenu {
+  grid-column: 1 / -1;
+
+  .stateContent {
+    padding-bottom: 208px;
+  }
+}
+
+.openSelect {
+  .stateContent {
+    padding-bottom: 256px;
+  }
+}
+
+.cardExample {
+  padding: 28px 32px;
+  border: 1px solid $divider;
+}
