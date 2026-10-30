@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getCommentCount, sortRequests, type SortOption } from "../../lib/feedback";
 import type { Category, ProductRequest } from "../../lib/types";
 import { CategoryFilter, type CategoryFilterValue } from "../CategoryFilter/CategoryFilter";
@@ -19,6 +19,7 @@ export function SuggestionsView({ requests }: SuggestionsViewProps) {
   const [category, setCategory] = useState<CategoryFilterValue>("all");
   const [sort, setSort] = useState<SortOption>("most-upvotes");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const visibleRequests = useMemo(() => {
     const suggestions = requests.filter(
@@ -33,24 +34,24 @@ export function SuggestionsView({ requests }: SuggestionsViewProps) {
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsDrawerOpen(false);
+        menuButtonRef.current?.focus();
       }
     }
 
-    // The drawer only exists below the tablet breakpoint.
-    const tabletQuery = window.matchMedia("(min-width: 768px)");
-    function closeOnTablet(event: MediaQueryListEvent) {
-      if (event.matches) {
+    // The drawer only exists while the menu button is shown, which the styles decide.
+    function closeWhenMenuButtonHidden() {
+      if (menuButtonRef.current && getComputedStyle(menuButtonRef.current).display === "none") {
         setIsDrawerOpen(false);
       }
     }
 
     document.addEventListener("keydown", closeOnEscape);
-    tabletQuery.addEventListener("change", closeOnTablet);
+    window.addEventListener("resize", closeWhenMenuButtonHidden);
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", closeOnEscape);
-      tabletQuery.removeEventListener("change", closeOnTablet);
+      window.removeEventListener("resize", closeWhenMenuButtonHidden);
       document.body.style.overflow = "";
     };
   }, [isDrawerOpen]);
@@ -64,6 +65,7 @@ export function SuggestionsView({ requests }: SuggestionsViewProps) {
             <p className={styles.brandTagline}>Feedback Board</p>
           </div>
           <button
+            ref={menuButtonRef}
             type="button"
             className={styles.menuButton}
             aria-label={isDrawerOpen ? "Close menu" : "Open menu"}

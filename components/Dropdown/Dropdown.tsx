@@ -17,10 +17,16 @@ export interface DropdownProps {
   id?: string;
   disabled?: boolean;
   defaultOpen?: boolean;
+  // Only for /design-system: shows an option's hover style without a pointer.
+  previewHoverIndex?: number;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
   "aria-describedby"?: string;
   "aria-invalid"?: true;
   "data-state"?: "hover" | "active";
 }
+
+type Highlight = "none" | "pointer" | "keyboard";
 
 export function Dropdown({
   options,
@@ -30,25 +36,22 @@ export function Dropdown({
   id,
   disabled,
   defaultOpen = false,
+  previewHoverIndex,
+  "aria-label": ariaLabel = variant === "sort" ? "Sort by" : undefined,
+  "aria-labelledby": ariaLabelledBy,
   ...triggerAttributes
 }: DropdownProps) {
   const uid = useId();
+  const listId = `${uid}-list`;
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
-  const moveFocusToList = useRef(false);
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  const [activeIndex, setActiveIndex] = useState(-1);
 
   const selectedIndex = options.findIndex((option) => option.value === value);
   const selectedLabel = options[selectedIndex]?.label ?? "";
 
-  useEffect(() => {
-    if (isOpen && moveFocusToList.current) {
-      listRef.current?.focus();
-    }
-    moveFocusToList.current = false;
-  }, [isOpen]);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [activeIndex, setActiveIndex] = useState(Math.max(selectedIndex, 0));
+  const [highlight, setHighlight] = useState<Highlight>("none");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,9 +66,9 @@ export function Dropdown({
     return () => document.removeEventListener("pointerdown", closeOnOutsidePress);
   }, [isOpen]);
 
-  function open(startIndex: number) {
-    moveFocusToList.current = true;
-    setActiveIndex(startIndex);
+  function open(nextHighlight: Highlight) {
+    setActiveIndex(Math.max(selectedIndex, 0));
+    setHighlight(nextHighlight);
     setIsOpen(true);
   }
 
@@ -79,37 +82,42 @@ export function Dropdown({
     close();
   }
 
-  function handleTriggerKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    if (["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) {
-      event.preventDefault();
-      open(Math.max(selectedIndex, 0));
-    }
+  function moveActiveOption(index: number) {
+    setActiveIndex(index);
+    setHighlight("keyboard");
   }
 
-  function handleListKeyDown(event: KeyboardEvent<HTMLUListElement>) {
+  // Focus stays on the trigger, so it handles the keys whether the menu is open or closed.
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if (!isOpen) {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) {
+        event.preventDefault();
+        open("keyboard");
+      }
+      return;
+    }
+
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        setActiveIndex((index) => (index + 1) % options.length);
+        moveActiveOption((activeIndex + 1) % options.length);
         break;
       case "ArrowUp":
         event.preventDefault();
-        setActiveIndex((index) => (index <= 0 ? options.length - 1 : index - 1));
+        moveActiveOption(activeIndex === 0 ? options.length - 1 : activeIndex - 1);
         break;
       case "Home":
         event.preventDefault();
-        setActiveIndex(0);
+        moveActiveOption(0);
         break;
       case "End":
         event.preventDefault();
-        setActiveIndex(options.length - 1);
+        moveActiveOption(options.length - 1);
         break;
       case "Enter":
       case " ":
         event.preventDefault();
-        if (activeIndex >= 0) {
-          select(activeIndex);
-        }
+        select(activeIndex);
         break;
       case "Escape":
         event.preventDefault();
@@ -127,12 +135,17 @@ export function Dropdown({
         ref={triggerRef}
         id={id}
         type="button"
+        role="combobox"
         disabled={disabled}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-controls={listId}
+        aria-activedescendant={isOpen ? `${uid}-${activeIndex}` : undefined}
         className={styles[variant]}
-        onClick={() => (isOpen ? setIsOpen(false) : open(-1))}
-        onKeyDown={handleTriggerKeyDown}
+        onClick={() => (isOpen ? setIsOpen(false) : open("none"))}
+        onKeyDown={handleKeyDown}
         {...triggerAttributes}
       >
         {variant === "sort" ? (
@@ -147,12 +160,14 @@ export function Dropdown({
 
       {isOpen && (
         <ul
-          ref={listRef}
+          id={listId}
           role="listbox"
-          tabIndex={-1}
-          aria-activedescendant={activeIndex >= 0 ? `${uid}-${activeIndex}` : undefined}
-          className={`${styles.menu} ${variant === "sort" ? styles.sortMenu : ""}`}
-          onKeyDown={handleListKeyDown}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          className={`${styles.menu} ${variant === "sort" ? styles.sortMenu : ""} ${
+            highlight === "keyboard" ? styles.keyboardNavigation : ""
+          }`}
+          onMouseDown={(event) => event.preventDefault()}
         >
           {options.map((option, index) => (
             <li
@@ -160,11 +175,20 @@ export function Dropdown({
               id={`${uid}-${index}`}
               role="option"
               aria-selected={option.value === value}
-              className={`${styles.option} ${index === activeIndex ? styles.activeOption : ""}`}
+              data-state={index === previewHoverIndex ? "hover" : undefined}
+              className={`${styles.option} ${highlight !== "none" && index === activeIndex ? styles.activeOption : ""}`}
               onClick={() => select(index)}
+              onMouseMove={() => {
+                setActiveIndex(index);
+                setHighlight("pointer");
+              }}
             >
               {option.label}
-              {option.value === value && <Icon name="check" />}
+              {option.value === value && (
+                <span className={styles.check}>
+                  <Icon name="check" />
+                </span>
+              )}
             </li>
           ))}
         </ul>

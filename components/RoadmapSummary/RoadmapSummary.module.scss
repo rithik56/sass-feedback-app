@@ -30,7 +30,8 @@
   @include type("body-3");
   color: $color-blue;
   text-decoration: underline;
-  opacity: 0.25;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .rows {
@@ -52,7 +53,7 @@
   flex: none;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: $radius-full;
 }
 
 .planned {

@@ -1,15 +1,8 @@
 import Image from "next/image";
-import type { SortOption } from "../../lib/feedback";
+import { SORT_OPTIONS, type SortOption } from "../../lib/feedback";
 import { LinkButton } from "../Button/Button";
-import { Dropdown, type DropdownOption } from "../Dropdown/Dropdown";
+import { Dropdown } from "../Dropdown/Dropdown";
 import styles from "./SuggestionsToolbar.module.scss";
-
-const SORT_OPTIONS: DropdownOption[] = [
-  { value: "most-upvotes", label: "Most Upvotes" },
-  { value: "least-upvotes", label: "Least Upvotes" },
-  { value: "most-comments", label: "Most Comments" },
-  { value: "least-comments", label: "Least Comments" },
-];
 
 export interface SuggestionsToolbarProps {
   count: number;

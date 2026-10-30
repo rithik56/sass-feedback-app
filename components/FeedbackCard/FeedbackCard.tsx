@@ -24,7 +24,7 @@ export function FeedbackCard({ request, commentCount }: FeedbackCardProps) {
         <p className={styles.description}>{request.description}</p>
         <Tag className={styles.tag}>{CATEGORY_LABELS[request.category]}</Tag>
       </div>
-      <Upvote count={request.upvotes} compact className={styles.upvote} />
+      <Upvote count={request.upvotes} title={request.title} compact className={styles.upvote} />
       <div className={styles.comments}>
         <Image src="/assets/shared/icon-comments.svg" alt="" width={18} height={16} />
         <span className={`${styles.commentCount} ${commentCount === 0 ? styles.noComments : ""}`}>

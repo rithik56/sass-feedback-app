@@ -26,7 +26,9 @@ export function RoadmapSummary({ requests }: RoadmapSummaryProps) {
             View
           </Link>
         ) : (
-          <span className={styles.viewDisabled}>View</span>
+          <span role="link" aria-disabled="true" className={styles.viewDisabled}>
+            View
+          </span>
         )}
       </div>
       <ul className={styles.rows}>

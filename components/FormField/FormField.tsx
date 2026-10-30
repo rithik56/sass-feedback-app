@@ -5,6 +5,7 @@ import styles from "./FormField.module.scss";
 
 export interface FormFieldControlProps {
   id: string;
+  "aria-labelledby": string;
   "aria-describedby"?: string;
   "aria-invalid"?: true;
 }
@@ -18,13 +19,14 @@ export interface FormFieldProps {
 
 export function FormField({ label, hint, error, children }: FormFieldProps) {
   const id = useId();
+  const labelId = `${id}-label`;
   const hintId = `${id}-hint`;
   const errorId = `${id}-error`;
   const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(" ");
 
   return (
     <div className={styles.field}>
-      <label htmlFor={id} className={styles.label}>
+      <label id={labelId} htmlFor={id} className={styles.label}>
         {label}
       </label>
       {hint && (
@@ -35,6 +37,7 @@ export function FormField({ label, hint, error, children }: FormFieldProps) {
       <div className={styles.control}>
         {children({
           id,
+          "aria-labelledby": labelId,
           "aria-describedby": describedBy || undefined,
           "aria-invalid": error ? true : undefined,
         })}

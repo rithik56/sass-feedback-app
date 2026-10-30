@@ -3,13 +3,14 @@
 import { useState, type ReactNode } from "react";
 import { Button, type ButtonVariant } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
-import { Dropdown, type DropdownOption } from "../../components/Dropdown/Dropdown";
+import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { FormField } from "../../components/FormField/FormField";
 import { GoBack } from "../../components/GoBack/GoBack";
 import { Tag } from "../../components/Tag/Tag";
 import { TextArea } from "../../components/TextArea/TextArea";
 import { TextInput } from "../../components/TextInput/TextInput";
 import { Upvote } from "../../components/Upvote/Upvote";
+import { CATEGORY_OPTIONS, SORT_OPTIONS } from "../../lib/feedback";
 import styles from "./DesignSystemPreview.module.scss";
 
 const COLORS = [
@@ -53,21 +54,6 @@ const TYPE_STYLES = [
 
 const BUTTON_VARIANTS: ButtonVariant[] = ["purple", "blue", "navy", "red"];
 
-const SORT_OPTIONS: DropdownOption[] = [
-  { value: "most-upvotes", label: "Most Upvotes" },
-  { value: "least-upvotes", label: "Least Upvotes" },
-  { value: "most-comments", label: "Most Comments" },
-  { value: "least-comments", label: "Least Comments" },
-];
-
-const CATEGORY_OPTIONS: DropdownOption[] = [
-  { value: "feature", label: "Feature" },
-  { value: "ui", label: "UI" },
-  { value: "ux", label: "UX" },
-  { value: "enhancement", label: "Enhancement" },
-  { value: "bug", label: "Bug" },
-];
-
 function noop() {}
 
 interface SectionProps {
@@ -101,8 +87,8 @@ function State({ label, children }: StateProps) {
 export function DesignSystemPreview() {
   const [upvoted, setUpvoted] = useState(false);
   const [tagActive, setTagActive] = useState(false);
-  const [sort, setSort] = useState(SORT_OPTIONS[0].value);
-  const [category, setCategory] = useState(CATEGORY_OPTIONS[0].value);
+  const [sort, setSort] = useState<string>(SORT_OPTIONS[0].value);
+  const [category, setCategory] = useState<string>(CATEGORY_OPTIONS[0].value);
   const [title, setTitle] = useState("");
 
   return (
@@ -180,22 +166,22 @@ export function DesignSystemPreview() {
       <Section title="Upvote">
         <div className={styles.grid}>
           <State label="Default">
-            <Upvote count={99} />
+            <Upvote count={99} title="Example" />
           </State>
           <State label="Hover">
-            <Upvote count={99} data-state="hover" />
+            <Upvote count={99} title="Example" data-state="hover" />
           </State>
           <State label="Active">
-            <Upvote count={100} active />
+            <Upvote count={100} title="Example" active />
           </State>
           <State label="Disabled">
-            <Upvote count={99} disabled />
+            <Upvote count={99} title="Example" disabled />
           </State>
           <State label="Try it">
-            <Upvote count={upvoted ? 100 : 99} active={upvoted} onClick={() => setUpvoted(!upvoted)} />
+            <Upvote count={upvoted ? 100 : 99} title="Example" active={upvoted} onClick={() => setUpvoted(!upvoted)} />
           </State>
           <State label="Compact (horizontal on mobile)">
-            <Upvote count={99} compact />
+            <Upvote count={99} title="Example" compact />
           </State>
         </div>
       </Section>
@@ -246,7 +232,7 @@ export function DesignSystemPreview() {
           <div className={styles.openMenu}>
             <State label="Menu open">
               <div className={styles.sortBar}>
-                <Dropdown variant="sort" options={SORT_OPTIONS} value={SORT_OPTIONS[0].value} onChange={noop} defaultOpen />
+                <Dropdown variant="sort" options={SORT_OPTIONS} value={SORT_OPTIONS[0].value} onChange={noop} defaultOpen previewHoverIndex={1} />
               </div>
             </State>
           </div>
@@ -287,11 +273,11 @@ export function DesignSystemPreview() {
             </FormField>
           </State>
           <State label="Select: active">
-            <Dropdown options={CATEGORY_OPTIONS} value={CATEGORY_OPTIONS[0].value} onChange={noop} data-state="active" />
+            <Dropdown aria-label="Active example" options={CATEGORY_OPTIONS} value={CATEGORY_OPTIONS[0].value} onChange={noop} data-state="active" />
           </State>
           <div className={styles.openSelect}>
             <State label="Select: menu open">
-              <Dropdown options={CATEGORY_OPTIONS} value={CATEGORY_OPTIONS[0].value} onChange={noop} defaultOpen />
+              <Dropdown aria-label="Open example" options={CATEGORY_OPTIONS} value={CATEGORY_OPTIONS[0].value} onChange={noop} defaultOpen previewHoverIndex={1} />
             </State>
           </div>
         </div>

@@ -75,6 +75,7 @@ Font: Jost (400, 500, 600, 700), loaded with `next/font`. Apply styles with `@in
 |---|---|---|
 | `$radius-lg` | `10px` | Buttons, cards, menus |
 | `$radius-sm` | `5px` | Form fields |
+| `$radius-full` | `50%` | Status dots |
 | `$shadow-menu` | `0 10px 40px -7px rgba(55, 63, 104, 0.35)` | Menus |
 | `$divider` | `rgba(58, 67, 116, 0.15)` | Dividers |
 | `$overlay` | `rgba(0, 0, 0, 0.5)` | Mobile drawer backdrop |
@@ -114,7 +115,7 @@ Figma's desktop frames are 1440px wide and has no frames between 768px and 1440p
 - Use the `hover` mixin for hover styles so `/design-system` can show them with `data-state="hover"`.
 - Reuse components from `components/` before creating new ones.
 - Every interactive element needs hover, `:focus-visible` and disabled styles.
-- Figma doesn't define focus or disabled styles. Use a 2px `$color-blue` outline with a 2px offset for focus, and 50% opacity with `cursor: not-allowed` for disabled. On dark or gradient backgrounds, use a `$color-white` outline instead with `@include focus-ring($color-white)`, because blue is hard to see there.
+- Figma doesn't define focus or disabled styles. Use a 2px `$color-blue` outline with a 2px offset for focus, and 50% opacity with `cursor: not-allowed` for disabled. On dark or gradient backgrounds, use a `$color-white` outline instead with `@include focus-ring($color-white)`, because blue is hard to see there. Text fields and textareas are also an exception: Figma's active state, the 1px `$color-blue` border, is their focus style.
 
 ## Accessibility
 

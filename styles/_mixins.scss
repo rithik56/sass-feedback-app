@@ -19,7 +19,7 @@ $breakpoints: (
 
 // data-state lets the /design-system page show a state without interaction.
 @mixin hover {
-  &:hover,
+  &:hover:not(:disabled),
   &[data-state="hover"] {
     @content;
   }

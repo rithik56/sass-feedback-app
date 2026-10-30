@@ -8,6 +8,7 @@
 
 .select {
   @include field;
+  @include focus-ring;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -85,17 +86,26 @@
   color: $color-slate;
   cursor: pointer;
 
-  // The check icon stays purple in every state.
-  > :last-child:not(:only-child) {
-    color: $color-purple;
-  }
-
   & + & {
     border-top: 1px solid $divider;
   }
 
-  &:hover,
+  @include hover {
+    color: $color-purple;
+  }
+
   &.activeOption {
     color: $color-purple;
   }
+}
+
+// While using the keyboard, a resting pointer shouldn't highlight a second option.
+.keyboardNavigation .option:hover:not(.activeOption) {
+  color: $color-slate;
+}
+
+// The check icon stays purple in every state.
+.check {
+  display: flex;
+  color: $color-purple;
 }

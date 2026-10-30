@@ -10,6 +10,21 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   bug: "Bug",
 };
 
+export const CATEGORY_OPTIONS: { value: Category; label: string }[] = [
+  { value: "feature", label: CATEGORY_LABELS.feature },
+  { value: "ui", label: CATEGORY_LABELS.ui },
+  { value: "ux", label: CATEGORY_LABELS.ux },
+  { value: "enhancement", label: CATEGORY_LABELS.enhancement },
+  { value: "bug", label: CATEGORY_LABELS.bug },
+];
+
+export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "most-upvotes", label: "Most Upvotes" },
+  { value: "least-upvotes", label: "Least Upvotes" },
+  { value: "most-comments", label: "Most Comments" },
+  { value: "least-comments", label: "Least Comments" },
+];
+
 export function getCommentCount(request: ProductRequest): number {
   return (request.comments ?? []).reduce((total, comment) => total + 1 + (comment.replies?.length ?? 0), 0);
 }
