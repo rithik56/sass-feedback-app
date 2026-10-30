@@ -114,7 +114,7 @@ Figma's desktop frames are 1440px wide and has no frames between 768px and 1440p
 - Use the `hover` mixin for hover styles so `/design-system` can show them with `data-state="hover"`.
 - Reuse components from `components/` before creating new ones.
 - Every interactive element needs hover, `:focus-visible` and disabled styles.
-- Figma doesn't define focus or disabled styles. Use a 2px `$color-blue` outline with a 2px offset for focus, and 50% opacity with `cursor: not-allowed` for disabled.
+- Figma doesn't define focus or disabled styles. Use a 2px `$color-blue` outline with a 2px offset for focus, and 50% opacity with `cursor: not-allowed` for disabled. On dark or gradient backgrounds, use a `$color-white` outline instead with `@include focus-ring($color-white)`, because blue is hard to see there.
 
 ## Accessibility
 
