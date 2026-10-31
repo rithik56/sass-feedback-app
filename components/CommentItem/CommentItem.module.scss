@@ -1,0 +1,159 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @include mq(tablet) {
+    gap: 32px;
+  }
+}
+
+.avatar {
+  flex: none;
+  border-radius: $radius-full;
+}
+
+.name {
+  @include type("title-sm");
+
+  @include mq(tablet) {
+    @include type("h4");
+  }
+}
+
+.username {
+  @include type("caption-sm");
+  color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("caption");
+  }
+}
+
+.replyButton {
+  @include type("body-3");
+  @include focus-ring;
+  @include disabled;
+  margin-left: auto;
+  color: $color-blue;
+
+  @include hover {
+    text-decoration: underline;
+  }
+}
+
+.body {
+  position: relative;
+  margin-top: 16px;
+
+  @include mq(tablet) {
+    margin-top: 17px;
+    padding-left: 72px;
+  }
+}
+
+// Figma's tablet frame sets replies closer together than desktop.
+.replyBody {
+  @include mq(tablet) {
+    margin-top: 10px;
+  }
+
+  @include mq(desktop) {
+    margin-top: 17px;
+  }
+}
+
+.bodyWithThreadLine::before {
+  @include mq(tablet) {
+    content: "";
+    position: absolute;
+    top: 6px;
+    bottom: 0;
+    left: 20px;
+    width: 1px;
+    background-color: $thread-line;
+  }
+}
+
+.content {
+  @include type("caption-sm");
+  color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("body-2");
+  }
+}
+
+.mention {
+  margin-right: 8px;
+  font-weight: $font-weight-bold;
+  color: $color-purple;
+}
+
+.replies {
+  margin-left: 24px;
+
+  @include mq(tablet) {
+    margin-left: 45px;
+  }
+}
+
+// Each reply draws its part of the line down to the last reply's avatar.
+.reply {
+  --reply-gap: 24px;
+  position: relative;
+  padding-top: var(--reply-gap);
+
+  @include mq(tablet) {
+    --reply-gap: 32px;
+
+    & + & {
+      --reply-gap: 17px;
+    }
+  }
+
+  @include mq(desktop) {
+    & + & {
+      --reply-gap: 32px;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -24px;
+    width: 1px;
+    background-color: $thread-line;
+
+    @include mq(tablet) {
+      left: -25px;
+    }
+  }
+
+  // Mobile has no line beside the parent comment, so it starts at the first reply.
+  &:first-child::before {
+    top: var(--reply-gap);
+
+    @include mq(tablet) {
+      top: 0;
+    }
+  }
+
+  &:last-child::before {
+    bottom: auto;
+    height: calc(var(--reply-gap) + 20px);
+  }
+
+  &:first-child:last-child::before {
+    height: 20px;
+
+    @include mq(tablet) {
+      height: calc(var(--reply-gap) + 20px);
+    }
+  }
+}

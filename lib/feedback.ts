@@ -57,6 +57,13 @@ export const ROADMAP_COLUMNS: RoadmapColumn[] = [
   },
 ];
 
+// data.json paths are relative to the old starter HTML, like "./assets/user-images/a.jpg".
+export function getAssetUrl(path: string): string {
+  return path.replace(/^\.\//, "/");
+}
+
+export const COMMENT_MAX_LENGTH = 250;
+
 export function getCommentCount(request: ProductRequest): number {
   return (request.comments ?? []).reduce((total, comment) => total + 1 + (comment.replies?.length ?? 0), 0);
 }

@@ -3,15 +3,24 @@
 
 // Shared look for text inputs, textareas and the select trigger.
 @mixin field {
-  @include type("body-2");
+  @include type("caption-sm");
   @include disabled;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 16px;
   border: 1px solid transparent;
   border-radius: $radius-sm;
   outline: none;
   background-color: $color-surface;
   color: $color-navy;
+
+  @include mq(tablet) {
+    @include type("body-2");
+    padding: 0 24px;
+  }
+
+  &::placeholder {
+    color: $color-placeholder;
+  }
 
   @include hover {
     border-color: $color-blue;

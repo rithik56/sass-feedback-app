@@ -1,0 +1,35 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  padding: 24px;
+
+  @include mq(tablet) {
+    padding: 24px 32px 32px 34px;
+  }
+}
+
+.title {
+  @include type("h3");
+}
+
+.textArea {
+  margin-top: 24px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.counter {
+  @include type("caption-sm");
+  color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("body-2");
+  }
+}

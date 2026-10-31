@@ -16,7 +16,9 @@
     grid-template-columns: 40px minmax(0, 1fr) auto;
     padding: 28px 32px;
   }
+}
 
+.linked {
   @include hover {
     .title {
       color: $color-blue;

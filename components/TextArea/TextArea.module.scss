@@ -6,5 +6,9 @@
   min-height: 96px;
   padding-top: 16px;
   padding-bottom: 16px;
-  resize: vertical;
+  resize: none;
+}
+
+.short {
+  min-height: 80px;
 }

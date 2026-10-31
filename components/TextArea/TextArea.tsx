@@ -1,8 +1,11 @@
 import type { TextareaHTMLAttributes } from "react";
 import styles from "./TextArea.module.scss";
 
-export type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  // 80px instead of 96px, for comments and replies.
+  short?: boolean;
+}
 
-export function TextArea({ className = "", ...rest }: TextAreaProps) {
-  return <textarea className={`${styles.textArea} ${className}`} {...rest} />;
+export function TextArea({ short = false, className = "", ...rest }: TextAreaProps) {
+  return <textarea className={`${styles.textArea} ${short ? styles.short : ""} ${className}`} {...rest} />;
 }

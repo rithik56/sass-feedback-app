@@ -42,6 +42,7 @@ Next.js (App Router), strict TypeScript (no `any`), SCSS modules. No Tailwind or
 | `$color-orange` | `#F49F85` | Accent |
 | `$color-sky` | `#62BCFA` | Accent |
 | `$color-icon-muted` | `#CDD2EE` | Go Back arrow on dark |
+| `$color-placeholder` | `#8C92B3` | Field placeholder text |
 
 - The style guide labels the dark navy swatch `#4661E6`. Its real value is `#373F68`.
 - Figma also uses `#F2F4FE`. Always use `$color-surface-alt` instead.
@@ -80,7 +81,9 @@ Font: Jost (400, 500, 600, 700), loaded with `next/font`. Apply styles with `@in
 | `$radius-sm` | `5px` | Form fields |
 | `$radius-full` | `50%` | Status dots |
 | `$shadow-menu` | `0 10px 40px -7px rgba(55, 63, 104, 0.35)` | Menus |
-| `$divider` | `rgba(58, 67, 116, 0.15)` | Dividers |
+| `$divider` | `rgba(58, 67, 116, 0.15)` | Dropdown menu dividers |
+| `$divider-soft` | `rgba(140, 146, 179, 0.25)` | Comment dividers, Roadmap tabs |
+| `$thread-line` | `rgba(100, 113, 150, 0.1)` | Comment reply line |
 | `$overlay` | `rgba(0, 0, 0, 0.5)` | Mobile drawer backdrop |
 
 ### Spacing
@@ -104,7 +107,7 @@ Figma's desktop frames are 1440px wide and has no frames between 768px and 1440p
 | Go Back (text, or on dark) | Text only, 13px gap after the arrow; `dark` has no background of its own | Hover underlines the text |
 | Upvote | 40×53px; `compact` is horizontal, 69×32px, on mobile; `horizontal` is 69×32px at every width, 40px high on desktop | Hover `$color-surface-hover`; active `$color-blue` with white text |
 | Tag | 30px high, 16px side padding | Hover `$color-surface-hover`; active `$color-blue` with white text |
-| Text field / select | 48px high, 24px side padding; textarea 96px | Active: 1px `$color-blue` border; error: 1px `$color-red` border and message |
+| Text field / select | 48px high, 24px side padding (16px and 13px text on mobile); textarea 96px, `short` is 80px | Active: 1px `$color-blue` border; error: 1px `$color-red` border and message |
 | Dropdown menu | 48px rows, 16px below its trigger | Hover: `$color-purple` text; selected: checkmark |
 
 - Form errors follow `Desktop, active` in the New feedback section of `design/layouts.md`, plus the error field in the style guide. Every required field gets the same treatment.

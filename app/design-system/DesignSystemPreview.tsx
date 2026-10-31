@@ -31,6 +31,7 @@ const COLORS = [
   { token: "orange", hex: "#F49F85" },
   { token: "sky", hex: "#62BCFA" },
   { token: "icon-muted", hex: "#CDD2EE" },
+  { token: "placeholder", hex: "#8C92B3" },
 ];
 
 const TYPE_STYLES = [

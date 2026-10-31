@@ -1,0 +1,70 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 24px 88px;
+
+  @include mq(tablet) {
+    padding: 56px 40px 120px 39px;
+  }
+
+  @include mq(desktop) {
+    max-width: 730px;
+    margin: 0 auto;
+    padding: 80px 0 129px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comments {
+  padding: 24px 24px 24px 23px;
+
+  @include mq(tablet) {
+    padding: 24px 32px 33px;
+  }
+
+  @include mq(desktop) {
+    padding-bottom: 48px;
+  }
+}
+
+.comments.noComments {
+  padding-bottom: 24px;
+}
+
+.commentsTitle {
+  @include type("h3");
+
+  @include mq(tablet) {
+    padding-left: 2px;
+  }
+}
+
+.commentList {
+  margin-top: 24px;
+
+  @include mq(tablet) {
+    margin-top: 28px;
+  }
+}
+
+.commentRow {
+  & + & {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid $divider-soft;
+
+    @include mq(tablet) {
+      margin-top: 32px;
+      padding-top: 32px;
+    }
+  }
+}

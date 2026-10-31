@@ -46,7 +46,7 @@
 .tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-bottom: 1px solid $divider;
+  border-bottom: 1px solid $divider-soft;
 
   @include mq(tablet) {
     display: none;
