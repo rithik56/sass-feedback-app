@@ -80,33 +80,5 @@
 }
 
 .comments {
-  @include type("title-sm");
   grid-area: comments;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-
-  @include mq(tablet) {
-    @include type("count");
-    gap: 8px;
-  }
-}
-
-.commentCount {
-  min-width: 18px;
-  text-align: center;
-}
-
-.noComments {
-  opacity: 0.5;
-}
-
-.visuallyHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
 }

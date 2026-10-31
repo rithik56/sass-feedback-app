@@ -26,11 +26,12 @@
   }
 }
 
+// 25% comes from Figma's desktop empty frames, not the general 50% disabled rule.
 .viewDisabled {
   @include type("body-3");
   color: $color-blue;
   text-decoration: underline;
-  opacity: 0.5;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
@@ -47,25 +48,6 @@
   align-items: center;
   gap: 16px;
   color: $color-slate;
-}
-
-.dot {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: $radius-full;
-}
-
-.planned {
-  background-color: $color-orange;
-}
-
-.in-progress {
-  background-color: $color-purple;
-}
-
-.live {
-  background-color: $color-sky;
 }
 
 .count {

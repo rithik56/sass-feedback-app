@@ -2,10 +2,15 @@
 @use "../../styles/mixins" as *;
 
 .goBack {
-  @include type("button");
-  display: inline-flex;
+  @include type("button-sm");
+  display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 13px;
+  width: fit-content;
+
+  @include mq(tablet) {
+    @include type("button");
+  }
 
   @include hover {
     .label {
@@ -23,12 +28,12 @@
   }
 }
 
+// For use on a dark background, such as the Roadmap header.
 .dark {
   @include focus-ring($color-white);
-  justify-content: center;
-  width: 158px;
-  height: 53px;
-  border-radius: $radius-lg;
-  background-color: $color-navy-dark;
   color: $color-white;
+
+  > :first-child {
+    color: $color-icon-muted;
+  }
 }

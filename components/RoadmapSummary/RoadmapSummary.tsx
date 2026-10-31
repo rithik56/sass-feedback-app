@@ -1,20 +1,16 @@
 import Link from "next/link";
-import type { ProductRequest, Status } from "../../lib/types";
+import { ROADMAP_COLUMNS } from "../../lib/feedback";
+import type { ProductRequest } from "../../lib/types";
 import { Card } from "../Card/Card";
+import { StatusDot } from "../StatusDot/StatusDot";
 import styles from "./RoadmapSummary.module.scss";
-
-const ROWS: { status: Status; label: string }[] = [
-  { status: "planned", label: "Planned" },
-  { status: "in-progress", label: "In-Progress" },
-  { status: "live", label: "Live" },
-];
 
 export interface RoadmapSummaryProps {
   requests: ProductRequest[];
 }
 
 export function RoadmapSummary({ requests }: RoadmapSummaryProps) {
-  const counts = ROWS.map(({ status }) => requests.filter((request) => request.status === status).length);
+  const counts = ROADMAP_COLUMNS.map(({ status }) => requests.filter((request) => request.status === status).length);
   const hasRoadmapItems = counts.some((count) => count > 0);
 
   return (
@@ -32,10 +28,10 @@ export function RoadmapSummary({ requests }: RoadmapSummaryProps) {
         )}
       </div>
       <ul className={styles.rows}>
-        {ROWS.map(({ status, label }, index) => (
+        {ROADMAP_COLUMNS.map(({ status, title }, index) => (
           <li key={status} className={styles.row}>
-            <span className={`${styles.dot} ${styles[status]}`} />
-            {label}
+            <StatusDot status={status} />
+            {title}
             <span className={styles.count}>{counts[index]}</span>
           </li>
         ))}

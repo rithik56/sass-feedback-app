@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { CATEGORY_LABELS } from "../../lib/feedback";
 import type { ProductRequest } from "../../lib/types";
 import { Card } from "../Card/Card";
+import { CommentCount } from "../CommentCount/CommentCount";
 import { Tag } from "../Tag/Tag";
 import { Upvote } from "../Upvote/Upvote";
 import styles from "./FeedbackCard.module.scss";
@@ -25,13 +25,7 @@ export function FeedbackCard({ request, commentCount }: FeedbackCardProps) {
         <Tag className={styles.tag}>{CATEGORY_LABELS[request.category]}</Tag>
       </div>
       <Upvote count={request.upvotes} title={request.title} compact className={styles.upvote} />
-      <div className={styles.comments}>
-        <Image src="/assets/shared/icon-comments.svg" alt="" width={18} height={16} />
-        <span className={`${styles.commentCount} ${commentCount === 0 ? styles.noComments : ""}`}>
-          {commentCount}
-          <span className={styles.visuallyHidden}> {commentCount === 1 ? "comment" : "comments"}</span>
-        </span>
-      </div>
+      <CommentCount count={commentCount} className={styles.comments} />
     </Card>
   );
 }

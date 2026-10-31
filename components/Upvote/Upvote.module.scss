@@ -34,8 +34,7 @@
   }
 }
 
-// Horizontal on mobile, vertical from tablet up.
-.compact {
+@mixin row {
   flex-direction: row;
   gap: 8px;
   width: 69px;
@@ -46,6 +45,18 @@
     flex: 1;
     text-align: center;
   }
+}
+
+.horizontal {
+  @include row;
+
+  @include mq(desktop) {
+    height: 40px;
+  }
+}
+
+.compact {
+  @include row;
 
   @include mq(tablet) {
     flex-direction: column;

@@ -30,6 +30,7 @@ const COLORS = [
   { token: "surface-hover", hex: "#CFD7FF" },
   { token: "orange", hex: "#F49F85" },
   { token: "sky", hex: "#62BCFA" },
+  { token: "icon-muted", hex: "#CDD2EE" },
 ];
 
 const TYPE_STYLES = [
@@ -155,10 +156,14 @@ export function DesignSystemPreview() {
             <GoBack href="/design-system" data-state="hover" />
           </State>
           <State label="Dark: default">
-            <GoBack href="/design-system" variant="dark" />
+            <div className={styles.darkBar}>
+              <GoBack href="/design-system" variant="dark" />
+            </div>
           </State>
           <State label="Dark: hover">
-            <GoBack href="/design-system" variant="dark" data-state="hover" />
+            <div className={styles.darkBar}>
+              <GoBack href="/design-system" variant="dark" data-state="hover" />
+            </div>
           </State>
         </div>
       </Section>
@@ -182,6 +187,9 @@ export function DesignSystemPreview() {
           </State>
           <State label="Compact (horizontal on mobile)">
             <Upvote count={99} title="Example" compact />
+          </State>
+          <State label="Horizontal">
+            <Upvote count={99} title="Example" horizontal />
           </State>
         </div>
       </Section>

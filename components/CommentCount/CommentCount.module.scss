@@ -1,0 +1,44 @@
+@use "../../styles/mixins" as *;
+
+@mixin large {
+  @include type("count");
+  gap: 8px;
+}
+
+.comments {
+  @include type("title-sm");
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.tablet {
+  @include mq(tablet) {
+    @include large;
+  }
+}
+
+.desktop {
+  @include mq(desktop) {
+    @include large;
+  }
+}
+
+.count {
+  min-width: 18px;
+  text-align: center;
+}
+
+.none {
+  opacity: 0.5;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

@@ -1,6 +1,8 @@
 export type Category = "feature" | "ui" | "ux" | "enhancement" | "bug";
 
-export type Status = "suggestion" | "planned" | "in-progress" | "live";
+export type RoadmapStatus = "planned" | "in-progress" | "live";
+
+export type Status = "suggestion" | RoadmapStatus;
 
 export interface User {
   image: string;

@@ -1,4 +1,4 @@
-import type { Category, ProductRequest } from "./types";
+import type { Category, ProductRequest, RoadmapStatus } from "./types";
 
 export type SortOption = "most-upvotes" | "least-upvotes" | "most-comments" | "least-comments";
 
@@ -23,6 +23,38 @@ export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "least-upvotes", label: "Least Upvotes" },
   { value: "most-comments", label: "Most Comments" },
   { value: "least-comments", label: "Least Comments" },
+];
+
+export interface RoadmapColumn {
+  status: RoadmapStatus;
+  title: string;
+  cardLabel: string;
+  description: string;
+  mobileDescription: string;
+}
+
+export const ROADMAP_COLUMNS: RoadmapColumn[] = [
+  {
+    status: "planned",
+    title: "Planned",
+    cardLabel: "Planned",
+    description: "Ideas prioritized for research",
+    mobileDescription: "Ideas prioritized for research",
+  },
+  {
+    status: "in-progress",
+    title: "In-Progress",
+    cardLabel: "In Progress",
+    description: "Currently being developed",
+    mobileDescription: "Features currently being developed",
+  },
+  {
+    status: "live",
+    title: "Live",
+    cardLabel: "Live",
+    description: "Released features",
+    mobileDescription: "Released features",
+  },
 ];
 
 export function getCommentCount(request: ProductRequest): number {

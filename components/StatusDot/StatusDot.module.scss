@@ -1,0 +1,20 @@
+@use "../../styles/tokens" as *;
+
+.dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+}
+
+.planned {
+  background-color: $color-orange;
+}
+
+.in-progress {
+  background-color: $color-purple;
+}
+
+.live {
+  background-color: $color-sky;
+}

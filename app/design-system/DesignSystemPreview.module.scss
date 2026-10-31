@@ -18,6 +18,7 @@ $swatches: (
   "surface-hover": $color-surface-hover,
   "orange": $color-orange,
   "sky": $color-sky,
+  "icon-muted": $color-icon-muted,
 );
 
 .page {
@@ -121,6 +122,13 @@ $swatches: (
 .sortBar {
   display: inline-block;
   padding: 0 16px;
+  border-radius: $radius-lg;
+  background-color: $color-navy-dark;
+}
+
+.darkBar {
+  display: inline-block;
+  padding: 16px 24px;
   border-radius: $radius-lg;
   background-color: $color-navy-dark;
 }

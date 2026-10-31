@@ -1,0 +1,123 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 24px 24px;
+
+  // The colored bar along the top of the card.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 6px;
+  }
+
+  @include mq(tablet) {
+    padding: 26px 20px 24px;
+  }
+
+  @include mq(desktop) {
+    padding: 31px 32px 32px;
+  }
+
+  @include hover {
+    .title {
+      color: $color-blue;
+    }
+  }
+}
+
+.planned::before {
+  background-color: $color-orange;
+}
+
+.in-progress::before {
+  background-color: $color-purple;
+}
+
+.live::before {
+  background-color: $color-sky;
+}
+
+.status {
+  @include type("caption-sm");
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-slate;
+
+  @include mq(tablet) {
+    gap: 16px;
+  }
+
+  @include mq(desktop) {
+    @include type("body-1");
+  }
+}
+
+.title {
+  @include type("title-sm");
+  margin-top: 16px;
+
+  @include mq(tablet) {
+    margin-top: 14px;
+  }
+
+  @include mq(desktop) {
+    @include type("h3");
+    margin-top: 8px;
+  }
+}
+
+// Stretches over the whole card, so the card is one click target.
+.link {
+  @include focus-ring;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: $radius-lg;
+  }
+}
+
+// Reserves two lines, so tags and footers line up across cards like in Figma.
+.description {
+  @include type("caption-sm");
+  min-height: 38px;
+  margin-top: 9px;
+  color: $color-slate;
+
+  @include mq(desktop) {
+    @include type("body-1");
+    min-height: 46px;
+    margin-top: 4px;
+  }
+}
+
+.tag {
+  margin-top: 8px;
+
+  @include mq(tablet) {
+    margin-top: 24px;
+  }
+
+  @include mq(desktop) {
+    margin-top: 16px;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+// Sits above the card link's click target.
+.upvote {
+  position: relative;
+  z-index: 1;
+}

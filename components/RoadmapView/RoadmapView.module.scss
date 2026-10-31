@@ -1,0 +1,177 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.page {
+  @include mq(tablet) {
+    padding: 56px 40px 95px 39px;
+  }
+
+  @include mq(desktop) {
+    max-width: 1188px;
+    margin: 0 auto;
+    padding: 78px 39px 179px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 24px;
+  background-color: $color-navy-dark;
+
+  @include mq(tablet) {
+    height: 113px;
+    padding: 0 32px;
+    border-radius: $radius-lg;
+  }
+
+  @include mq(desktop) {
+    padding-right: 40px;
+  }
+}
+
+.title {
+  @include type("h3");
+  margin-top: 3px;
+  color: $color-white;
+
+  @include mq(tablet) {
+    @include type("h1");
+    margin-top: 4px;
+  }
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid $divider;
+
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.tab {
+  @include type("title-sm");
+  @include focus-ring;
+  @include disabled;
+  position: relative;
+  height: 59px;
+  outline-offset: -2px;
+
+  &[aria-selected="false"] .tabLabel {
+    opacity: 0.4;
+  }
+
+  &[aria-selected="false"] {
+    @include hover {
+      .tabLabel {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  // The colored bar under the selected tab.
+  &[aria-selected="true"]::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 4px;
+  }
+}
+
+.planned::after {
+  background-color: $color-orange;
+}
+
+.in-progress::after {
+  background-color: $color-purple;
+}
+
+.live::after {
+  background-color: $color-sky;
+}
+
+.columns {
+  padding: 24px 24px 98px;
+
+  @include mq(tablet) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 32px;
+    padding: 0;
+  }
+
+  @include mq(desktop) {
+    gap: 30px;
+    margin-top: 48px;
+  }
+}
+
+// Mobile shows the selected status only, tablet and up show every column.
+.column {
+  display: none;
+
+  @include mq(tablet) {
+    display: block;
+  }
+}
+
+.activeColumn {
+  display: block;
+}
+
+.columnTitle {
+  @include type("h3");
+
+  @include mq(tablet) {
+    @include type("h4");
+  }
+
+  @include mq(desktop) {
+    @include type("h3");
+  }
+}
+
+.columnDescription {
+  @include type("caption-sm");
+  margin-top: 4px;
+  color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("caption");
+  }
+
+  @include mq(desktop) {
+    @include type("body-1");
+  }
+}
+
+.mobileOnly {
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.tabletUp {
+  display: none;
+
+  @include mq(tablet) {
+    display: block;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+
+  @include mq(desktop) {
+    gap: 24px;
+    margin-top: 32px;
+  }
+}
