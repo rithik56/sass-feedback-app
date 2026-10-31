@@ -107,10 +107,11 @@ Figma's desktop frames are 1440px wide and has no frames between 768px and 1440p
 | Go Back (text, or on dark) | Text only, 13px gap after the arrow; `dark` has no background of its own | Hover underlines the text |
 | Upvote | 40×53px; `compact` is horizontal, 69×32px, on mobile; `horizontal` is 69×32px at every width, 40px high on desktop | Hover `$color-surface-hover`; active `$color-blue` with white text |
 | Tag | 30px high, 16px side padding | Hover `$color-surface-hover`; active `$color-blue` with white text |
-| Text field / select | 48px high, 24px side padding (16px and 13px text on mobile); textarea 96px, `short` is 80px | Active: 1px `$color-blue` border; error: 1px `$color-red` border and message |
+| Text field / select | 48px high, 24px side padding (16px and 13px text on mobile); textarea 120px on mobile and 96px from tablet, `short` is 80px | Active: 1px `$color-blue` border; error: 1px `$color-red` border and message |
 | Dropdown menu | 48px rows, 16px below its trigger | Hover: `$color-purple` text; selected: checkmark |
 
 - Form errors follow `Desktop, active` in the New feedback section of `design/layouts.md`, plus the error field in the style guide. Every required field gets the same treatment.
+- The `Desktop, Edit feedback` default frame has stale copy. Use `Save Changes` and `Change feature state`, as in its active frame and the tablet and mobile frames.
 - Mobile Roadmap has one tab per status (`planned`, `in-progress`, `live`), starting on `in-progress`. Figma has one frame, so the other tabs follow its pattern. Inactive tab text is 40% opacity.
 
 ## Component conventions

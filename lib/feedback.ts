@@ -1,4 +1,4 @@
-import type { Category, ProductRequest, RoadmapStatus } from "./types";
+import type { Category, ProductRequest, RoadmapStatus, Status } from "./types";
 
 export type SortOption = "most-upvotes" | "least-upvotes" | "most-comments" | "least-comments";
 
@@ -16,6 +16,13 @@ export const CATEGORY_OPTIONS: { value: Category; label: string }[] = [
   { value: "ux", label: CATEGORY_LABELS.ux },
   { value: "enhancement", label: CATEGORY_LABELS.enhancement },
   { value: "bug", label: CATEGORY_LABELS.bug },
+];
+
+export const STATUS_OPTIONS: { value: Status; label: string }[] = [
+  { value: "suggestion", label: "Suggestion" },
+  { value: "planned", label: "Planned" },
+  { value: "in-progress", label: "In-Progress" },
+  { value: "live", label: "Live" },
 ];
 
 export const SORT_OPTIONS: { value: SortOption; label: string }[] = [

@@ -1,12 +1,17 @@
 @use "../../styles/field" as *;
+@use "../../styles/mixins" as *;
 
 .textArea {
   @include field;
   display: block;
-  min-height: 96px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  min-height: 120px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   resize: none;
+
+  @include mq(tablet) {
+    min-height: 96px;
+  }
 }
 
 .short {

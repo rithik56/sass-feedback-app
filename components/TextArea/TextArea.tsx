@@ -2,7 +2,7 @@ import type { TextareaHTMLAttributes } from "react";
 import styles from "./TextArea.module.scss";
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  // 80px instead of 96px, for comments and replies.
+  // 80px at every width instead of 120px on mobile and 96px from tablet, for comments and replies.
   short?: boolean;
 }
 

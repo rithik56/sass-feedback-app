@@ -6,15 +6,24 @@
 }
 
 .label {
-  @include type("h4");
+  @include type("title-sm");
   display: block;
   color: $color-navy;
+
+  @include mq(tablet) {
+    @include type("h4");
+  }
 }
 
 .hint {
-  @include type("caption");
-  margin-top: 2px;
+  @include type("caption-sm");
+  margin-top: 3px;
   color: $color-slate;
+
+  @include mq(tablet) {
+    @include type("caption");
+    margin-top: 2px;
+  }
 }
 
 .control {
@@ -22,7 +31,11 @@
 }
 
 .error {
-  @include type("caption");
+  @include type("caption-sm");
   margin-top: 4px;
   color: $color-red;
+
+  @include mq(tablet) {
+    @include type("caption");
+  }
 }

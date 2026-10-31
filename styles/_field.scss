@@ -2,11 +2,12 @@
 @use "mixins" as *;
 
 // Shared look for text inputs, textareas and the select trigger.
+// Padding is 1px under the Figma value to make room for the border.
 @mixin field {
   @include type("caption-sm");
   @include disabled;
   width: 100%;
-  padding: 0 16px;
+  padding: 0 15px;
   border: 1px solid transparent;
   border-radius: $radius-sm;
   outline: none;
@@ -15,7 +16,7 @@
 
   @include mq(tablet) {
     @include type("body-2");
-    padding: 0 24px;
+    padding: 0 23px;
   }
 
   &::placeholder {
