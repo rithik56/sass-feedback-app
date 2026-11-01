@@ -1,5 +1,6 @@
 @use "../../styles/tokens" as *;
 @use "../../styles/mixins" as *;
+@use "../../styles/field" as *;
 
 .card {
   padding: 24px;
@@ -15,6 +16,10 @@
 
 .textArea {
   margin-top: 24px;
+}
+
+.error {
+  @include field-error;
 }
 
 .footer {

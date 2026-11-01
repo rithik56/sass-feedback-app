@@ -8,6 +8,9 @@ import { ReplyForm } from "../ReplyForm/ReplyForm";
 import styles from "./CommentItem.module.scss";
 
 interface CommentEntryProps {
+  requestId: number;
+  // Replies always join the thread of the top-level comment, even when answering another reply.
+  commentId: number;
   user: User;
   content: string;
   replyingTo?: string;
@@ -15,7 +18,15 @@ interface CommentEntryProps {
   isReply?: boolean;
 }
 
-function CommentEntry({ user, content, replyingTo, hasThreadLine = false, isReply = false }: CommentEntryProps) {
+function CommentEntry({
+  requestId,
+  commentId,
+  user,
+  content,
+  replyingTo,
+  hasThreadLine = false,
+  isReply = false,
+}: CommentEntryProps) {
   const [isReplying, setIsReplying] = useState(false);
 
   return (
@@ -43,7 +54,15 @@ function CommentEntry({ user, content, replyingTo, hasThreadLine = false, isRepl
           {replyingTo && <strong className={styles.mention}>@{replyingTo}</strong>}
           {content}
         </p>
-        {isReplying && <ReplyForm replyingToName={user.name} />}
+        {isReplying && (
+          <ReplyForm
+            requestId={requestId}
+            commentId={commentId}
+            replyingToName={user.name}
+            replyingToUsername={user.username}
+            onPosted={() => setIsReplying(false)}
+          />
+        )}
       </div>
     </>
   );
@@ -51,19 +70,33 @@ function CommentEntry({ user, content, replyingTo, hasThreadLine = false, isRepl
 
 export interface CommentItemProps {
   comment: Comment;
+  requestId: number;
 }
 
-export function CommentItem({ comment }: CommentItemProps) {
+export function CommentItem({ comment, requestId }: CommentItemProps) {
   const replies: Reply[] = comment.replies ?? [];
 
   return (
     <article>
-      <CommentEntry user={comment.user} content={comment.content} hasThreadLine={replies.length > 0} />
+      <CommentEntry
+        requestId={requestId}
+        commentId={comment.id}
+        user={comment.user}
+        content={comment.content}
+        hasThreadLine={replies.length > 0}
+      />
       {replies.length > 0 && (
         <ul className={styles.replies}>
           {replies.map((reply, index) => (
             <li key={index} className={styles.reply}>
-              <CommentEntry user={reply.user} content={reply.content} replyingTo={reply.replyingTo} isReply />
+              <CommentEntry
+                requestId={requestId}
+                commentId={comment.id}
+                user={reply.user}
+                content={reply.content}
+                replyingTo={reply.replyingTo}
+                isReply
+              />
             </li>
           ))}
         </ul>

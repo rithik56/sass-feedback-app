@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState, type FormEvent } from "react";
 import { CATEGORY_OPTIONS, STATUS_OPTIONS } from "../../lib/feedback";
-import type { ProductRequest } from "../../lib/types";
+import { addFeedback, updateFeedback } from "../../lib/store";
+import type { Category, ProductRequest, Status } from "../../lib/types";
 import { Button, LinkButton } from "../Button/Button";
 import { Card } from "../Card/Card";
 import { Dropdown } from "../Dropdown/Dropdown";
@@ -18,9 +20,12 @@ const EMPTY_ERROR = "Can’t be empty";
 export interface FeedbackFormProps {
   // The feedback to edit. Leave it out to create new feedback.
   request?: ProductRequest;
+  onDelete?: () => void;
 }
 
-export function FeedbackForm({ request }: FeedbackFormProps) {
+export function FeedbackForm({ request, onDelete }: FeedbackFormProps) {
+  const router = useRouter();
+  const isSaved = useRef(false);
   const [title, setTitle] = useState(request?.title ?? "");
   const [category, setCategory] = useState<string>(request?.category ?? CATEGORY_OPTIONS[0].value);
   const [status, setStatus] = useState<string>(request?.status ?? STATUS_OPTIONS[0].value);
@@ -34,6 +39,19 @@ export function FeedbackForm({ request }: FeedbackFormProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setShowErrors(true);
+
+    const draft = { title: title.trim(), category: category as Category, description: description.trim() };
+
+    // A second click before the page changes must not save the feedback twice.
+    if (!draft.title || !draft.description || isSaved.current) return;
+    isSaved.current = true;
+
+    if (request) {
+      updateFeedback(request.id, { ...draft, status: status as Status });
+    } else {
+      addFeedback(draft);
+    }
+    router.push(backHref);
   }
 
   return (
@@ -87,7 +105,7 @@ export function FeedbackForm({ request }: FeedbackFormProps) {
               Cancel
             </LinkButton>
             {request && (
-              <Button variant="red" compact className={`${styles.action} ${styles.delete}`}>
+              <Button variant="red" compact className={`${styles.action} ${styles.delete}`} onClick={onDelete}>
                 Delete
               </Button>
             )}

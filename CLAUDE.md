@@ -114,6 +114,12 @@ Figma's desktop frames are 1440px wide and has no frames between 768px and 1440p
 - The `Desktop, Edit feedback` default frame has stale copy. Use `Save Changes` and `Change feature state`, as in its active frame and the tablet and mobile frames.
 - Mobile Roadmap has one tab per status (`planned`, `in-progress`, `live`), starting on `in-progress`. Figma has one frame, so the other tabs follow its pattern. Inactive tab text is 40% opacity.
 
+## Data
+
+- All feedback, votes, comments and replies go through `lib/store.ts`. It starts from `starter-code/data.json` and saves every change to `localStorage`.
+- Don't read `feedbackData` in components. Use `useFeedback` or `useRequest`, and change data with the store's actions.
+- Pages are rendered on the server from the sample data. Feedback created in the browser is unknown there, so only the client can decide a page is missing.
+
 ## Component conventions
 
 - Each component gets a folder: `components/Button/Button.tsx` and `components/Button/Button.module.scss`.

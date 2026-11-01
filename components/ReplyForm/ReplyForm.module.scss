@@ -1,4 +1,5 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/field" as *;
 
 // Figma only has this form on desktop, so the stacked mobile layout is an adaptation.
 .form {
@@ -14,6 +15,15 @@
   }
 }
 
-.textArea {
-  flex: 1;
+.field {
+  width: 100%;
+
+  @include mq(tablet) {
+    flex: 1;
+    width: auto;
+  }
+}
+
+.error {
+  @include field-error;
 }

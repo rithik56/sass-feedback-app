@@ -37,3 +37,13 @@
     border-color: $color-red;
   }
 }
+
+@mixin field-error {
+  @include type("caption-sm");
+  margin-top: 4px;
+  color: $color-red;
+
+  @include mq(tablet) {
+    @include type("caption");
+  }
+}

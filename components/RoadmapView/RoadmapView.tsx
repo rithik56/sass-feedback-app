@@ -2,17 +2,15 @@
 
 import { useRef, useState, type KeyboardEvent } from "react";
 import { ROADMAP_COLUMNS } from "../../lib/feedback";
-import type { ProductRequest, RoadmapStatus } from "../../lib/types";
+import { useFeedback } from "../../lib/store";
+import type { RoadmapStatus } from "../../lib/types";
 import { LinkButton } from "../Button/Button";
 import { GoBack } from "../GoBack/GoBack";
 import { RoadmapCard } from "../RoadmapCard/RoadmapCard";
 import styles from "./RoadmapView.module.scss";
 
-export interface RoadmapViewProps {
-  requests: ProductRequest[];
-}
-
-export function RoadmapView({ requests }: RoadmapViewProps) {
+export function RoadmapView() {
+  const { requests } = useFeedback();
   const [activeStatus, setActiveStatus] = useState<RoadmapStatus>("in-progress");
   const tabRefs = useRef<Partial<Record<RoadmapStatus, HTMLButtonElement | null>>>({});
 

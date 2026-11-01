@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getCommentCount, sortRequests, type SortOption } from "../../lib/feedback";
+import { useFeedback } from "../../lib/store";
 import type { Category, ProductRequest } from "../../lib/types";
 import { CategoryFilter, type CategoryFilterValue } from "../CategoryFilter/CategoryFilter";
 import { EmptyFeedback } from "../EmptyFeedback/EmptyFeedback";
@@ -12,10 +13,13 @@ import { SuggestionsToolbar } from "../SuggestionsToolbar/SuggestionsToolbar";
 import styles from "./SuggestionsView.module.scss";
 
 export interface SuggestionsViewProps {
-  requests: ProductRequest[];
+  // Replaces the saved feedback, for design-system previews.
+  requests?: ProductRequest[];
 }
 
-export function SuggestionsView({ requests }: SuggestionsViewProps) {
+export function SuggestionsView({ requests: previewRequests }: SuggestionsViewProps) {
+  const feedback = useFeedback();
+  const requests = previewRequests ?? feedback.requests;
   const [category, setCategory] = useState<CategoryFilterValue>("all");
   const [sort, setSort] = useState<SortOption>("most-upvotes");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

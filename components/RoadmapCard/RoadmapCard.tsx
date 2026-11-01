@@ -3,9 +3,9 @@ import { CATEGORY_LABELS, getCommentCount } from "../../lib/feedback";
 import type { ProductRequest, RoadmapStatus } from "../../lib/types";
 import { Card } from "../Card/Card";
 import { CommentCount } from "../CommentCount/CommentCount";
+import { RequestUpvote } from "../RequestUpvote/RequestUpvote";
 import { StatusDot } from "../StatusDot/StatusDot";
 import { Tag } from "../Tag/Tag";
-import { Upvote } from "../Upvote/Upvote";
 import styles from "./RoadmapCard.module.scss";
 
 export interface RoadmapCardProps {
@@ -29,7 +29,7 @@ export function RoadmapCard({ request, status, statusLabel }: RoadmapCardProps) 
       <p className={styles.description}>{request.description}</p>
       <Tag className={styles.tag}>{CATEGORY_LABELS[request.category]}</Tag>
       <div className={styles.footer}>
-        <Upvote count={request.upvotes} title={request.title} horizontal className={styles.upvote} />
+        <RequestUpvote request={request} horizontal className={styles.upvote} />
         <CommentCount count={getCommentCount(request)} largeFrom="desktop" />
       </div>
     </Card>
